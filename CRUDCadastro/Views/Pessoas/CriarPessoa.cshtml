@@ -1,0 +1,124 @@
+﻿@model CRUDCadastro.Models.Pessoa
+
+@{
+    ViewData["Title"] = "CriarPessoa";
+}
+
+<body>
+    <h1>CriarPessoa</h1>
+
+    <h4>Pessoa</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form id="formulario" asp-action="CriarPessoa">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" placeholder="Coloque o seu nome" id="Nome" name="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SobreNome" class="control-label"></label>
+                    <input asp-for="SobreNome" placeholder="Coloque o seu sobrenome" id="Sobrenome" name="SobreNome" class="form-control" />
+                    <span asp-validation-for="SobreNome" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CPF" class="control-label"></label>
+                    <input id="CPF" asp-for="CPF" class="form-control" />
+                    <span id="resposta" asp-validation-for="CPF" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Idade" class="control-label"></label>
+                    <input asp-for="Idade" class="form-control" />
+                    <span asp-validation-for="Idade" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telefone" class="control-label"></label>
+                    <input placeholder="Telefone" id="telefone" name="telefone" asp-for="Telefone" class="form-control" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+
+</body>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            $("#formulario").submit(function () {
+                if ($("#Sobrenome").val() == null || $("#Sobrenome").val() == "") {
+                    swal("Insira o seu sobrenome!");
+                    return false;
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#formulario").submit(function () {
+                if ($("#Nome").val() == null || $("#Nome").val() == "") {
+                    swal("Insira o seu nome!");
+                    return false;
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var $seuCampoCpf = $("#CPF");
+            $seuCampoCpf.mask('000.000.000-00');
+            $("#formulario").submit(function () {
+                if ($("#CPF").val() == null || $("#CPF").val() == "") {
+                    swal("Insira o CPF!");
+                    return false;
+                }
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var $seuCampoTelefone = $("#telefone")
+            $seuCampoTelefone.mask("(00) 00000-0000");
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#formulario").submit(function () {
+                if ($("#telefone").val() == null || $("#telefone").val() == "") {
+                    swal("Insira o telefone!");
+                    return false;
+                }
+            });
+        });
+    </script>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
